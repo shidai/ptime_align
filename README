@@ -1,0 +1,21 @@
+NAME: ptime_align, to align and scale two profiles
+AUTHOR: SHI DAI
+VERSION: 1.0 3-MAR-2014
+		 
+INPUT: rname, fname, nchn, frac, rotate
+	   rname: the name of data file, PSRFITS format, as the reference profile; fname will be aligned to rname; typically, this should be T,F scrunched profile
+	   fname: the name of data file, PSRFITS format; you need to tell the program which sub-channel "nchn" will be aligned to rname  
+	   nchn: the index of sub-channel, which will be aligned to rname
+	   frac: fraction of off pulse 
+	   rotate: fraction of pi to rotate profile
+
+OUTPUT: 
+
+To compile: sh run.sh (fftw3 and cfitsio needed)
+
+Usage: ./ptime_align.out -r rname -f fname nchn -frac on off -rotate rot 
+	    -r rname: the name of data file, PSRFITS format, as the reference profile; fname will be aligned to rname
+		-f fname: data file, multiple files are not supported; 
+	    -frac off: fraction of off pulse 
+	    -rotate rot: fraction of pi to rotate profile
+
