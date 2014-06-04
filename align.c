@@ -174,7 +174,7 @@ int def_off_pulse (int nphase, double *in, double frac_off)
 			small = 0.0;
 			for(j = 0; j < num_off; j++)
 			{
-				small += (in[j]+30000)*(in[j]+30000);
+				small += (in[j]+30000.0)*(in[j]+30000.0);
 			}
 			small = sqrt(small/num_off);
 		}
@@ -184,19 +184,20 @@ int def_off_pulse (int nphase, double *in, double frac_off)
 		{
 			if ((i+j) > n-1)
 			{
-				temp += (in[(i+j)-(n-1)]+30000)*(in[(i+j)-(n-1)+30000]);
+				temp += (in[(i+j)-(n-1)]+30000.0)*(in[(i+j)-(n-1)]+30000.0);
 			}
 			else 
 			{
-				temp += (in[i+j]+30000)*(in[i+j]+30000);
+				temp += (in[i+j]+30000.0)*(in[i+j]+30000.0);
 			}
 		}
 		temp = sqrt(temp/num_off);
 
 		small = (temp <= small ? temp : small);
 		index = (temp <= small ? i : index);
-		//printf ("%d %lf %lf\n", index, small, ave);
+		//printf ("%d %lf \n", index, small);
 	}
+	//printf ("%d\n",index);
 
 	return index;
 }
