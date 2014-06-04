@@ -21,8 +21,10 @@ int find_peak (int n, double *s, int *position)
 	double a, b, c;
 	for (i = 0; i < n-1; i++)
 	{
-		a = fabs(temp[i]);
-		b = fabs(temp[i+1]);
+		a = temp[i];
+		b = temp[i+1];
+		//a = fabs(temp[i]);
+		//b = fabs(temp[i+1]);
 		c = (a >= b ? a : b);
 
 		temp[i+1] = c;
@@ -31,7 +33,8 @@ int find_peak (int n, double *s, int *position)
 
 	for (i = 0; i < n; i++)
 	{
-		if (fabs(peak-fabs(s[i])) < 1.0e-3)
+		if (fabs(peak-s[i]) < 1.0e-3)
+		//if (fabs(peak-fabs(s[i])) < 1.0e-3)
 		{
 			(*position) = i;
 		}
@@ -53,11 +56,12 @@ double find_peak_value (int n, double *s)
 	double a, b, c;
 	for (i = 0; i < n-1; i++)
 	{
-		//a = temp[i];
-		//b = temp[i+1];
-		a = fabs(temp[i]);
-		b = fabs(temp[i+1]);
-		c = (fabs(a) >= fabs(b) ? a : b);
+		a = temp[i];
+		b = temp[i+1];
+		//a = fabs(temp[i]);
+		//b = fabs(temp[i+1]);
+		c = (a >= b ? a : b);
+		//c = (fabs(a) >= fabs(b) ? a : b);
 
 		temp[i+1] = c;
 	}
@@ -170,7 +174,7 @@ int def_off_pulse (int nphase, double *in, double frac_off)
 			small = 0.0;
 			for(j = 0; j < num_off; j++)
 			{
-				small += (in[j])*(in[j]);
+				small += (in[j]+30000)*(in[j]+30000);
 			}
 			small = sqrt(small/num_off);
 		}
@@ -180,11 +184,11 @@ int def_off_pulse (int nphase, double *in, double frac_off)
 		{
 			if ((i+j) > n-1)
 			{
-				temp += (in[(i+j)-(n-1)])*(in[(i+j)-(n-1)]);
+				temp += (in[(i+j)-(n-1)]+30000)*(in[(i+j)-(n-1)+30000]);
 			}
 			else 
 			{
-				temp += (in[i+j])*(in[i+j]);
+				temp += (in[i+j]+30000)*(in[i+j]+30000);
 			}
 		}
 		temp = sqrt(temp/num_off);
